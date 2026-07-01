@@ -1,134 +1,178 @@
 <% layout("layouts/boilerplate") %>
     <style>
-        #filters {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+.filters-row{
+    display:flex;
+    align-items:center;
+    width:100%;
+    gap:1rem;
+}
 
-        .filter {
-            text-align: center;
-            margin-right: 2rem;
-            margin-top: 2rem;
-            opacity: 0.7;
-        }
+#filters{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:2rem;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    scrollbar-width:none;
+}
 
-        .filter:hover {
-            opacity: 1;
-            cursor: pointer;
-        }
+#filters::-webkit-scrollbar{
+    display:none;
+}
 
-        .filter p {
-            font-size: 0.8rem;
-        }
+.filter{
+    flex-shrink:0;
+    text-align:center;
+    opacity:.7;
+}
 
-        .filter a {
-            text-decoration: none;
-            color: inherit;
-        }
+.filter:hover{
+    opacity:1;
+}
 
-        .tax-info {
-            display: none;
-        }
+.filter a{
+    text-decoration:none;
+    color:inherit;
+}
 
-        .tax-toggle {
-            height: 3.25rem;
-            border: 1px solid black;
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-left: 2rem;
-            display: flex;
-            align-items: center;
-        }
+.tax-toggle{
+    width:25%;
+    /* margin-left:auto; */
+    border:1px solid black;
+    border-radius: 25px;
+    min-width:260px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+    margin-bottom:1rem;
+    padding:0.5rem 1rem;
+
+}
+
+.tax-toggle .form-switch{
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+}
+
+.tax-toggle label{
+    margin:0;
+    white-space:nowrap;
+}
     </style>
 
     <!-- <h3>All Listings</h3> -->
+<div class="filters-row">
+
     <div id="filters">
+
         <div class="filter">
             <a href="/listings/category/Trending">
                 <div><i class="fa-solid fa-fire"></i></div>
                 <p>Trending</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Rooms">
                 <div><i class="fa-solid fa-bed"></i></div>
                 <p>Rooms</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Iconic City">
                 <div><i class="fa-solid fa-mountain-city"></i></div>
                 <p>Iconic City</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Mountains">
                 <div><i class="fa-solid fa-mountain"></i></div>
                 <p>Mountains</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Castles">
                 <div><i class="fa-brands fa-fort-awesome"></i></div>
                 <p>Castles</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Amazing Pools">
                 <div><i class="fa-solid fa-person-swimming"></i></div>
                 <p>Amazing Pools</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Camping">
                 <div><i class="fa-solid fa-tent"></i></div>
                 <p>Camping</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Farms">
                 <div><i class="fa-solid fa-cow"></i></div>
                 <p>Farms</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Arctic">
                 <div><i class="fa-regular fa-snowflake"></i></div>
                 <p>Arctic</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Dungeon">
-                <i class="fa-solid fa-dungeon"></i>
+                <div><i class="fa-solid fa-dungeon"></i></div>
                 <p>Dungeon</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Ferry">
                 <div><i class="fa-solid fa-ship"></i></div>
                 <p>Ferry</p>
             </a>
         </div>
+
         <div class="filter">
             <a href="/listings/category/Luxury">
                 <div><i class="fa-solid fa-crown"></i></div>
                 <p>Luxury</p>
             </a>
         </div>
-        
 
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-                <label class="form-check-label" for="switchCheckDefault">Display total after tax</label>
-            </div>
+    </div>
 
+    <div class="tax-toggle">
+        <div class="form-check form-switch">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="switchCheckDefault">
+
+            <label class="form-check-label" for="switchCheckDefault">
+                Display total after tax
+            </label>
         </div>
     </div>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3 mt-3">
+
+</div>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3">
         <% for (let listing of allListing) { %>
-            <div class="col">
+            <div class="col-sm-6">
                 <a href="/listings/<%= listing._id %>" class="listing-link">
                     <div class="card listing-card">
                         <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"
